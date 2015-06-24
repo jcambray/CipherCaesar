@@ -24,32 +24,8 @@ public class HomophonicCipher {
 				bytesList.add(new Byte(Integer.toString(i)));
 				bytesList.set(0,new Byte(Integer.toString(bytesList.size() - 1)));
 			}
-				
-			
 		}
 		return key;
-		
-	}
-	
-	
-	private byte[] writeToBuffer(byte[] buffer,int value, boolean init){
-		
-		ByteBuffer bb = ByteBuffer.wrap(buffer);
-		System.out.println(bb);
-		if(init){
-			bb.putInt(0,1);
-			bb.putInt(value);
-		}
-		else
-		{
-			//modifie le nombre d'octet contenu dans le byte array
-			//et insertion de la nouvelle valeur
-			int newValue = bb.getInt(1);
-			bb.putInt(1,++newValue);
-			bb.putInt(value);
-		}
-		
-		return bb.array();
 		
 	}
 	
