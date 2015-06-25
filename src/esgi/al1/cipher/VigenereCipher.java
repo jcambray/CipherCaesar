@@ -7,9 +7,9 @@ public class VigenereCipher {
 	
 	private final static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 	
-	public ArrayList<String> generateKey(){
+	public ArrayList<Character> generateKey(){
 
-		 ArrayList<String> keys = new ArrayList<>();
+		 ArrayList<Character> keys = new ArrayList<>();
 		 keys.add(alphabet.charAt((int) (Math.random() * ( 2 - 26))));
 		 keys.add(alphabet.charAt((int) (Math.random() * ( 2 - 26))));
 		 return keys;
