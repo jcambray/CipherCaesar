@@ -31,7 +31,7 @@ public class HomophonicCipher {
 	
 	
 	public String encode(String message, String key) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
