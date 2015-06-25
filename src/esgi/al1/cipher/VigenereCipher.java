@@ -32,16 +32,27 @@ public class VigenereCipher {
 		return decoded.toString();
 	}
 
-	
+	public String encode(String encoded, ArrayList<Character> key){
+		int keysIndex = 0;
+		StringBuilder decoded = new StringBuilder();
+		int transpose;
+		for(int i = 0; i <encoded.length(); i++){
+			transpose = key.get(i);
+			decoded.append(((char)((encoded.charAt(i) + transpose + 26) % 26 + 'A')));
+			if(transpose == key.size())
+				transpose = 0;
+		}
+		return decoded.toString();
+	}
 
-	public String encode(String message, String key) {
+	/*public String encode(String message, String key) {
 		StringBuilder builderKey = new StringBuilder();
 		HashMap<Character, Character> associateKey = new HashMap<Character, Character>();
 		
-		/*
+		
 		 * Create tab
 		 *  key => value == character from message => character value from key
-		 */
+		 
 		int o = 0;
 		for(int i = 0; i < message.length();i++) {
 			if(message.charAt(i) == 32) {
@@ -72,7 +83,7 @@ public class VigenereCipher {
 	    
 		return builderKey.toString();
 	}
-
+*/
 
 
 }

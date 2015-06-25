@@ -11,10 +11,11 @@ public class Main {
 		HashMap<Character, ArrayList<Byte>> key = h.generateKey("hello etienne");
 		System.out.println(key);*/
 		VigenereCipher cipher = new VigenereCipher();
-		System.out.println(cipher.generateKey("cccccc"));
-		ArrayList<Character> key = new ArrayList<Character>();
-		key.add('B');key.add('C');key.add('B');key.add('C');key.add('B');
-		System.out.println(cipher.decode("IGMNP",cipher.generateKey("cccccc")));
+		String message = "HELLO";
+		ArrayList<Character> key = cipher.generateKey(message);
+		String encode = cipher.encode("HELLO", key);
+		System.out.println("encode " + encode);
+		System.out.println(cipher.decode(encode,key));
 	}
 
 }
