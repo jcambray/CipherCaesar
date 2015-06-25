@@ -6,14 +6,15 @@ public class CipherCaesar implements ICipher {
 
 	@Override
 	public String encode(String message, char key) {
-		int intkey = (int)key - 97;
+		int intkey = (int)key - 96;
+		System.out.println(intkey);
 		char[] messageTable = message.toCharArray();
-		if(key > alphabet.length())
+		if(intkey > alphabet.length())
 			return null;
-		for(int i = 0;i < messageTable.length - intkey; i++) {
+		for(int i = 0;i < messageTable.length; i++) {
 			int messageCharIndex = message.charAt(i);
 			int encodedCharIndex =  messageCharIndex + intkey;
-			if(encodedCharIndex < alphabet.length())
+			if(encodedCharIndex - 96 < alphabet.length())
 				messageTable[i] = (char)((int)message.charAt(i) + intkey);
 			else
 				messageTable[i] = (char)(messageCharIndex % alphabet.length());
