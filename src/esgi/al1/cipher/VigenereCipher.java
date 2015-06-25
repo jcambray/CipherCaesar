@@ -1,29 +1,63 @@
-package esgi.al1.cipher;
+package factory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+public class VigenereCipher implements ICipter {
 
-public class VigenereCipher {
-	
 	private final static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 	
-	public ArrayList<Character> generateKey(){
+	public ArrayList<Character> generateKey() {
+		ArrayList<Character> keys = new ArrayList<>();
+		keys.add(alphabet.charAt((int) (Math.random() * ( 2 - 26))));
+		keys.add(alphabet.charAt((int) (Math.random() * ( 2 - 26))));
+		return keys;
+	}
+	
+	@Override
+	public String encode(String message, String key) {
+		StringBuilder builderKey = new StringBuilder();
+		HashMap<Character, Character> associateKey = new HashMap<Character, Character>();
+		
+		/*
+		 * Create tab
+		 *  key => value == character from message => character value from key
+		 */
+		int o = 0;
+		for(int i = 0; i < message.length();i++) {
+			if(message.charAt(i) == 32) {
+				builderKey.append(" ");
+			} else {
+				associateKey.put(new Character(message.charAt(i)), new Character(key.charAt(o)));
+				Character messageCharacter = new Character(message.charAt(i));
+				Character keyCharacter = new Character(key.charAt(o));
+				
+				if(!messageCharacter.equals(" ")) {
+			        int leftToRight = ((int)messageCharacter.charValue()) - 97;
+			        char character;
+			        // System.out.println(leftToRight);
+			        if(keyCharacter.charValue() + leftToRight < (97 + alphabet.length()))
+		    			character = (char)(keyCharacter.charValue() + leftToRight);
+		    		else 
+		    			character = (char)(((keyCharacter.charValue() + leftToRight) % (97 + alphabet.length())) + 97);
+			        
+			        builderKey.append(new Character(character));
+		        } else {
+		        	builderKey.append(" ");
+		        }
+				
+				if(++o >= key.length())
+					o = 0;
+			}
+		}
+	    
+		return builderKey.toString();
+	}
 
-		 ArrayList<Character> keys = new ArrayList<>();
-		 keys.add(alphabet.charAt((int) (Math.random() * ( 2 - 26))));
-		 keys.add(alphabet.charAt((int) (Math.random() * ( 2 - 26))));
-		 return keys;
+	@Override
+	public String decode(String crypted, String key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	
-	public String encode(String message, String key){
-		
-	}
-	
-	
-	public String decode(){
-		
-	}
-	
 
 }
